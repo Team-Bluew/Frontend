@@ -1,0 +1,26 @@
+{
+  "name": "nova-dex",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5",
+    "next": "14.2.5",
+    "porto": "^0.2.37",
+    "react": "^18",
+    "react-dom": "^18",
+    "viem": "^2",
+    "wagmi": "^2.19.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  }
+}
