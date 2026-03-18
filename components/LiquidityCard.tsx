@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAccount, useWriteContract, useWaitForTransactionReceipt, useSwitchChain } from "wagmi";
 import { parseEther, parseUnits } from "viem";
 import { sepolia } from "wagmi/chains";
@@ -66,6 +66,7 @@ export default function LiquidityCard({ ddl, onNotify }: Props) {
       } else {
         onNotify("ok", "Transaction confirmed!");
         setLiqEth("");
+        setRemoveAmt(0);
         refetch();
       }
     }
@@ -106,9 +107,11 @@ export default function LiquidityCard({ ddl, onNotify }: Props) {
     if (!isConnected) return onNotify("wn", "Connect your wallet first.");
     await ensureSepolia();
     if (!removeAmt) return onNotify("er", "Select LP amount to remove.");
-    const amtBig = parseUnits(removeAmt.toString(), 18);
-    const minEth = parseEther((ethOut * 0.99).toFixed(18));
-    const minTok = parseUnits((tokOut * 0.99).toFixed(18), 18);
+    const amtBig = parseEther(removeAmt.toFixed(18));
+    const minEthStr = (ethOut * 0.99).toLocaleString("fullwide", { maximumFractionDigits: 18, useGrouping: false });
+    const minTokStr = (tokOut * 0.99).toLocaleString("fullwide", { maximumFractionDigits: 18, useGrouping: false });
+    const minEth = parseEther(minEthStr);
+    const minTok = parseUnits(minTokStr, 18);
     const dl = deadline(ddl);
     try {
       writeContract({ address: DEX_ADDRESS, abi: DEX_ABI, functionName: "withdraw", args: [amtBig, minEth, minTok, dl], chainId: sepolia.id });

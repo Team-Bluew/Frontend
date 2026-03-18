@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import { parseEther, parseUnits, formatUnits } from "viem";
 import { ammOut, priceImpact, fmt, deadline, parseContractError } from "@/lib/amm";

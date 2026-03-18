@@ -1,7 +1,7 @@
 "use client";
 
 import { useWatchContractEvent } from "wagmi";
-import { useState } from "react";
+import React, { useState } from "react";
 import { formatEther, formatUnits } from "viem";
 import { ActivityItem, shortAddr } from "@/lib/amm";
 import { DEX_ABI } from "./abi";
